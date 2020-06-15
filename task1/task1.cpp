@@ -7,7 +7,7 @@
 
 
 
-
+#define ARRAY_SIZE 1000
 
 class list {
 public:
@@ -35,10 +35,10 @@ void Search_list_element(list* head,int element)
 		
 		if (temp1->data == element)
 		{
-			printf("\n%d\n", temp1->data);
+			//printf("\n%d\n", temp1->data);
 			auto stop = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
-			printf("\nTimer List 900: %lld", static_cast<long long int>(duration.count()));
+			printf("\nSearch_list_element: %lld", static_cast<long long int>(duration.count()));
 		}
 		temp1 = temp1->next;
 	}
@@ -84,50 +84,46 @@ void Delete_list_element(list* head, int element)
 	}
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
-	//printf("\nTimer List 500: %lld", static_cast<long long int>(duration.count()));
-	current = head;
-	while (current != NULL)
+	printf("\nDelete_list_element: %lld", static_cast<long long int>(duration.count()));
+	//current = head;
+	/*while (current != NULL)
 	{
 		printf("\n%d\n", current->data);
 		current = current->next;
-	}
+	}*/
 }
 
-void timer_arr900(int arr[])
+void timer_arr900(int arr[], int element)
 {
 	auto start = std::chrono::high_resolution_clock::now();
+	if (element < ARRAY_SIZE && element >= 0) {
+		int elem = arr[element];//found it
+	}
 	
-	int elem = arr[900];//found it
 
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
-	printf("\nArray List 900: %lld", static_cast<long long int>(duration.count()));
+	printf("\nSearch_array_elem: %lld", static_cast<long long int>(duration.count()));
 			
 	
 }
 
-void timer_arr500(int arr[])
+void timer_arr_reduced500(int arr[])
 {
-	int *reduced_arr = new int[999];
+	int *reduced_arr = new int[ARRAY_SIZE-1];
 	int d = 0;
-	//int *arr2 = new int[100];
-	//int size = *(&arr2 + 1) - arr2;
+	
 	auto start = std::chrono::high_resolution_clock::now();
-	//std::cout << "\n" << size << "\n";
-	//printf("\n%d\n", sizeof(reduced_arr[0]));
-	for (int i = 0; i < 1000; i++)
+	
+	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
+	
 
 		if (arr[d] == 500)
 		{
-			//printf("\n%d\n", arr[d]);
-			//auto stop = std::chrono::high_resolution_clock::now();
-			//auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+			
 			d++;
-			//arr[d] = arr[d + 1];
-			//printf("\n%d\n", arr[d]);
-			//printf("\nArray List 500: %lld\n", static_cast<long long int>(duration.count()));
-			//break;
+			
 		}
 		reduced_arr[i] = arr[d];
 		d++;
@@ -142,24 +138,11 @@ void timer_arr500(int arr[])
 	//
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
-	printf("\nArray List 500: %lld\n", static_cast<long long int>(duration.count()));
+	printf("\nDelete_array_elem: %lld\n", static_cast<long long int>(duration.count()));
 	delete[] arr;
 }
 
-int count_arr(int arr[]) {
-	int temp, d = 0;
-	while (1)
-	{
-		try {
-			temp = arr[d];
-			d++;
-		}
-		catch(...) {
-			break;
-		}
-	}
-	return d;
-}
+
 
 int main()
 {
@@ -177,31 +160,18 @@ int main()
 			temp = temp->next;		
 		}
 
-		int* arr = new int[1000];
+		int* arr = new int[ARRAY_SIZE];
 		for (int i = 0; i < 1000; i++)
 		{
 			arr[i] = i+1;
 			//printf("\n%d", arr[i]);
 		}
 		
-		//Search_list_element(head, 602);
-		//timer_arr900(arr);
+		Search_list_element(head, 602);
+		timer_arr900(arr, 900);
 		Delete_list_element(head, 1000);
-		//timer_arr500(arr);
+		timer_arr_reduced500(arr);
 
-
-		/*temp = head;
-		while (temp != NULL)
-		{
-			printf("\n%d\n", temp->data);
-			temp = temp->next;
-		}*/
-
-		//delete[] arr;
-
-		//int* arrtest = new int[5]{ 1,2,3,4,5 };
-
-		//printf("\n%d\n", count_arr(arrtest));
 }
 
 
