@@ -62,7 +62,6 @@ void Delete_list_element(list* head, int element)
 		if (current->data == element)
 		{
 			
-			
 			if (prev == NULL) {
 				//printf("\n%d\n", current->data);
 				head = head->next;
